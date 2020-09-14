@@ -1,0 +1,84 @@
+// router.post(
+//   "/forgotpassword",
+//   [check("EMAIL", "Please include a valid email").isEmail()],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     const { EMAIL } = req.body;
+//     const FINDUSER = `SELECT EMAIL FROM USERS WHERE EMAIL="${EMAIL}"`;
+
+//     connection.query(FINDUSER, (err, result) => {
+//       if (result.length == 0 || result.length == []) {
+//         return res
+//           .status(500)
+//           .json({ errors: [{ msg: "No Email Exists with this ID" }] });
+//       }
+//     });
+//     // Generate Token
+//     const resetToken = crypto.randomBytes(20).toString("hex");
+//     console.log(resetToken);
+//     // Hash Token and Set to Rest Password Field
+//     const hashToken = crypto
+//       .createHash("sha256")
+//       .update(resetToken)
+//       .digest("hex");
+
+//     console.log(hashToken);
+//     const RESETPASSWORDEXPIRE = Date.now() + 10 * 60 * 1000;
+//     console.log(RESETPASSWORDEXPIRE);
+
+//     const UPDATERESETTOKEN = `UPDATE USERS SET RESETPASSWORDTOKEN = "${hashToken}", RESETPASSWORDEXPIRE = "${RESETPASSWORDEXPIRE}" WHERE EMAIL="${EMAIL}"`;
+
+//     connection.query(UPDATERESETTOKEN, (err, result) => {
+//       if (result > 0) {
+//         res.status(200).json({ msg: "Check Your Email" });
+//       }
+//     });
+//   }
+// );
+
+// router.put("/resetpassword/:resettoken", async (req, res) => {
+
+//   let { PASSWORD } = req.body
+//   // Get Hashed Token
+//   let RESETPASSWORDTOKEN = crypto
+//     .createHash("sha256")
+//     .update(req.params.resettoken)
+//     .digest("hex");
+
+//     const FINDUSER = `SELECT RESETPASSWORDTOKEN , RESETPASSWORDEXPIRE FROM USERS WHERE RESETPASSWORDTOKEN = "${RESETPASSWORDTOKEN}" AND RESETPASSWORDEXPIRE > "${Date.now()}"`
+//     console.log(FINDUSER)
+//     connection.query(FINDUSER, async (err, result) => {
+//       if (err) {
+//         console.log(err)
+//       } else {
+//               // Set the new Password 
+
+//     const salt = await bcrypt.genSalt(10)
+    
+//     PASSWORD = await bcrypt.hash(req.body.PASSWORD, salt)
+
+//     RESETPASSWORDTOKEN = null
+//     RESETPASSWORDEXPIRE = null
+
+//     const UPDATEPASSWORD = `UPDATE USERS SET RESETPASSWORDTOKEN = "${RESETPASSWORDTOKEN}", RESETPASSWORDEXPIRE = "${RESETPASSWORDEXPIRE}", PASSWORD = "${PASSWORD}") WHERE EMAIL = "jaydeepparmar253@gmail.com"`
+//     console.log(UPDATEPASSWORD)
+//     connection.query(UPDATEPASSWORD, (err, result) => {
+//       if (err) {
+//         console.log(err)
+//         res.status(500).json({ msg: "There is an Error" });
+//       } else {
+//         // res.status(200).json({ msg: "User Created Successfully" });
+//         console.log("User Updated Successfully");
+//       }
+//     })
+//       }
+//     })
+
+
+
+// });
