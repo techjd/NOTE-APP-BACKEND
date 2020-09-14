@@ -1,10 +1,5 @@
 {
-    "jwtSecret": "mysecretToken",
-    "SMTP_HOST": "smtp.sendgrid.net",
-    "SMTP_PORT": 25,
-    "SMTP_EMAIL": "apikey",
-    "SMTP_PASSWORD": "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",
-    "FROM_EMAIL": "jaydeepparmar723@gmail.com",
-    "FROM_NAME": "TECHJD"
+    "jwtSecret": "mysecretToken"
+
     
 }
